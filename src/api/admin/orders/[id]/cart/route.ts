@@ -33,7 +33,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   if (!cart) {
     throw new MedusaError(
       MedusaError.Types.NOT_FOUND,
-      `Cart for order with id ${id} not found`,
+      `No Cart Found For This Order`,
     );
   }
 

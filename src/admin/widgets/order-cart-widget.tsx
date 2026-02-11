@@ -37,7 +37,7 @@ const OrderCartWidget = ({ data }: DetailWidgetProps<AdminOrder>) => {
         </Heading>
 
         <Text className="text-center text-ui-fg-muted px-6 py-4" size="small">
-          Failed To Load Cart
+          {error?.message || "Failed To Load Cart"}
         </Text>
       </Container>
     );
