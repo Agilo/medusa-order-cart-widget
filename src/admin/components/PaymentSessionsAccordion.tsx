@@ -10,6 +10,12 @@ type AccordionProps = {
   paymentSessions: AdminPaymentSession[];
 };
 
+const formatStatus = (status: string) =>
+  status
+    .split("_")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+
 const getPaymentSessionBadgeColor = (status: string) => {
   switch (status) {
     case "authorized":
@@ -57,7 +63,7 @@ const PaymentSessionsAccordion = ({
 
               <div className="flex items-center gap-4">
                 <StatusBadge color={getPaymentSessionBadgeColor(s.status)}>
-                  {s.status}
+                  {formatStatus(s.status)}
                 </StatusBadge>
 
                 <IconButton
