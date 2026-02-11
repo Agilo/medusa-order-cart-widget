@@ -12,15 +12,16 @@ import { CSSProperties, MouseEvent, Suspense, useState } from "react";
 type JsonViewSectionProps = {
   data: object;
   title?: string;
+  size?: "small" | "xsmall";
 };
 
-const JsonViewSection = ({ data }: JsonViewSectionProps) => {
+const JsonViewSection = ({ data, size = "small" }: JsonViewSectionProps) => {
   const numberOfKeys = Object.keys(data).length;
 
   return (
     <div className="flex w-full items-center justify-between">
       <div className="flex items-center gap-x-4">
-        <Text className="text-ui-fg-subtle" size="small" weight="plus">
+        <Text className="text-ui-fg-subtle" size={size} weight="plus">
           JSON
         </Text>
         <Badge size="2xsmall" rounded="full">
@@ -30,7 +31,7 @@ const JsonViewSection = ({ data }: JsonViewSectionProps) => {
       <Drawer>
         <Drawer.Trigger asChild>
           <IconButton
-            size="small"
+            size={size}
             variant="transparent"
             className="text-ui-fg-muted hover:text-ui-fg-subtle"
           >

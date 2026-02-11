@@ -4,9 +4,44 @@ import { Container, Copy, Heading, Text } from "@medusajs/ui";
 import { useOrderCart } from "../hooks/order-cart";
 import JsonViewSection from "../components/JsonViewSection";
 import PaymentSessionsAccordion from "../components/PaymentSessionsAccordion";
+import { Spinner } from "@medusajs/icons";
 
 const OrderCartWidget = ({ data }: DetailWidgetProps<AdminOrder>) => {
   const { data: orderCartData, isLoading, error } = useOrderCart(data.id);
+
+  if (isLoading) {
+    return (
+      <Container className="divide-y p-0">
+        <Heading
+          level="h2"
+          className="w-full flex justify-between items-center px-6 py-4 gap-4"
+        >
+          Cart
+        </Heading>
+
+        <div className="flex justify-center px-6 py-4">
+          <Spinner className="animate-spin" />
+        </div>
+      </Container>
+    );
+  }
+
+  if (error || !orderCartData) {
+    return (
+      <Container className="divide-y p-0">
+        <Heading
+          level="h2"
+          className="w-full flex justify-between items-center px-6 py-4 gap-4"
+        >
+          Cart
+        </Heading>
+
+        <Text className="text-center text-ui-fg-muted px-6 py-4" size="small">
+          Failed To Load Cart
+        </Text>
+      </Container>
+    );
+  }
 
   return (
     <Container className="divide-y p-0">
@@ -60,10 +95,7 @@ const OrderCartWidget = ({ data }: DetailWidgetProps<AdminOrder>) => {
         </Text>
       </div>
 
-      <div className="grid w-full grid-cols-2 items-center gap-4 px-6 py-4">
-        <Text className="text-ui-fg-subtle" weight="plus" size="small">
-          Payment session
-        </Text>
+      <div className="w-full items-center gap-4 px-6 py-4">
         <JsonViewSection data={orderCartData || {}} />
       </div>
 

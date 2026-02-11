@@ -113,7 +113,7 @@ const PaymentSessionsAccordion = ({
               </div>
 
               <div className="w-full items-center gap-4 mt-4">
-                <JsonViewSection data={s} />
+                <JsonViewSection data={s} size="xsmall" />
               </div>
             </div>
           </div>
