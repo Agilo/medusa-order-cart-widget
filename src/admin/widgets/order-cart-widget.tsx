@@ -3,7 +3,7 @@ import { AdminOrder, DetailWidgetProps } from "@medusajs/framework/types";
 import { Container, Copy, Heading, Text } from "@medusajs/ui";
 import { useOrderCart } from "../hooks/order-cart";
 import JsonViewSection from "../components/JsonViewSection";
-import Accordion from "../components/Accordion";
+import PaymentSessionsAccordion from "../components/PaymentSessionsAccordion";
 
 const OrderCartWidget = ({ data }: DetailWidgetProps<AdminOrder>) => {
   const { data: orderCartData, isLoading, error } = useOrderCart(data.id);
@@ -67,7 +67,7 @@ const OrderCartWidget = ({ data }: DetailWidgetProps<AdminOrder>) => {
         <JsonViewSection data={orderCartData || {}} />
       </div>
 
-      <Accordion
+      <PaymentSessionsAccordion
         title="Payment sessions"
         paymentSessions={
           orderCartData?.payment_collection.payment_sessions || []
