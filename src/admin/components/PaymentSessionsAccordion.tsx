@@ -3,6 +3,7 @@ import { PlusMini } from "@medusajs/icons";
 import { IconButton, StatusBadge, Text } from "@medusajs/ui";
 import React from "react";
 import { formatAmount } from "../utils/format-amount";
+import JsonViewSection from "./JsonViewSection";
 
 type AccordionProps = {
   title: string;
@@ -109,6 +110,10 @@ const PaymentSessionsAccordion = ({
                     ? new Date(s.authorized_at).toLocaleString()
                     : "-"}
                 </Text>
+              </div>
+
+              <div className="w-full items-center gap-4 mt-4">
+                <JsonViewSection data={s} />
               </div>
             </div>
           </div>
