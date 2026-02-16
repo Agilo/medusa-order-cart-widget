@@ -10,6 +10,10 @@ type AccordionProps = {
   paymentSessions: AdminPaymentSession[];
 };
 
+type PaymentSessionData = {
+  pspReference?: string;
+};
+
 const formatStatus = (status: string) =>
   status
     .split("_")
@@ -83,9 +87,9 @@ const PaymentSessionsAccordion = ({
             </div>
 
             <div
-              className={`flex flex-col px-4 gap-2 overflow-hidden transition-all duration-200 ${
+              className={`flex flex-col px-4 gap-2 overflow-hidden transition-[max-height,opacity] duration-200 ${
                 active === s.id
-                  ? "max-h-40 py-2 opacity-100"
+                  ? "max-h-[1000px] py-2 opacity-100"
                   : "max-h-0 py-0 opacity-0"
               }`}
             >
@@ -115,6 +119,15 @@ const PaymentSessionsAccordion = ({
                   {s.authorized_at
                     ? new Date(s.authorized_at).toLocaleString()
                     : "-"}
+                </Text>
+              </div>
+
+              <div className="grid w-full grid-cols-2 gap-4">
+                <Text className="text-ui-fg-subtle" weight="plus" size="xsmall">
+                  Psp reference
+                </Text>
+                <Text className="text-ui-fg-muted break-words" size="xsmall">
+                  {(s.data as PaymentSessionData).pspReference ?? "-"}
                 </Text>
               </div>
 
