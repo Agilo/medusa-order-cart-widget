@@ -87,9 +87,9 @@ const PaymentSessionsAccordion = ({
             </div>
 
             <div
-              className={`flex flex-col px-4 gap-2 overflow-hidden transition-[max-height,opacity] duration-200 ${
+              className={`flex flex-col px-4 gap-2 overflow-hidden transition-all duration-300 ${
                 active === s.id
-                  ? "max-h-[1000px] py-2 opacity-100"
+                  ? "max-h-50 py-2 opacity-100"
                   : "max-h-0 py-0 opacity-0"
               }`}
             >
