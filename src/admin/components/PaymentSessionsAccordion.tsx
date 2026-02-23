@@ -1,5 +1,5 @@
 import { AdminPaymentSession } from "@medusajs/framework/types";
-import { PlusMini } from "@medusajs/icons";
+import { ChevronDown } from "@medusajs/icons";
 import { IconButton, StatusBadge, Text } from "@medusajs/ui";
 import React from "react";
 import { formatAmount } from "../utils/format-amount";
@@ -77,9 +77,9 @@ const PaymentSessionsAccordion = ({
                     setActive((prev) => (prev === s.id ? null : s.id))
                   }
                 >
-                  <PlusMini
+                  <ChevronDown
                     className={`transition-transform duration-200 ${
-                      active === s.id ? "rotate-45" : ""
+                      active === s.id ? "rotate-180" : ""
                     }`}
                   />
                 </IconButton>
