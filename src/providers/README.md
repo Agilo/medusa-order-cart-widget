@@ -24,7 +24,7 @@ module.exports = defineConfig({
       },
     },
   ],
-})
+});
 ```
 
 Learn more in [this documentation](https://docs.medusajs.com/learn/fundamentals/plugins/create).

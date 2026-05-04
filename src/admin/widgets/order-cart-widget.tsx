@@ -82,7 +82,9 @@ const OrderCartWidget = ({ data }: DetailWidgetProps<AdminOrder>) => {
           Created at
         </Text>
         <Text className="text-ui-fg-muted break-words" size="small">
-          {new Date(orderCartData?.created_at!).toLocaleString()}
+          {orderCartData?.created_at
+            ? new Date(orderCartData.created_at).toLocaleString()
+            : "-"}
         </Text>
       </div>
 
