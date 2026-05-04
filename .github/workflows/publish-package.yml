@@ -31,16 +31,22 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Verify release tag matches package version
-        if: github.event_name == 'release'
+      - name: Update version from release tag
         run: |
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          RELEASE_VERSION=${GITHUB_REF_NAME#v}
-
-          if [ "$PACKAGE_VERSION" != "$RELEASE_VERSION" ]; then
-            echo "package.json version ($PACKAGE_VERSION) does not match release tag ($RELEASE_VERSION)"
+          if [ "${GITHUB_REF_TYPE}" != "tag" ] && [ "${GITHUB_EVENT_NAME}" != "release" ]; then
+            echo "This workflow must run from a Git tag or GitHub release so the publish version is explicit."
             exit 1
           fi
+
+          VERSION=${GITHUB_REF_NAME#v}
+
+          if ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$'; then
+            echo "Release tag must resolve to a valid semver version, got: $GITHUB_REF_NAME"
+            exit 1
+          fi
+
+          echo "Publishing version: $VERSION"
+          npm pkg set version="$VERSION"
 
       - name: Run ESLint
         run: yarn lint
