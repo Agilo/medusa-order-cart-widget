@@ -22,7 +22,7 @@ yarn add @agilo/medusa-order-cart-widget
 Register the plugin in your Medusa config:
 
 ```ts
-import { defineConfig } from "@medusajs/framework/utils"
+import { defineConfig } from "@medusajs/framework/utils";
 
 module.exports = defineConfig({
   plugins: [
@@ -30,7 +30,7 @@ module.exports = defineConfig({
       resolve: "@agilo/medusa-order-cart-widget",
     },
   ],
-})
+});
 ```
 
 Restart the Medusa server and open any order in Medusa Admin. The widget is injected into the `order.details.side.after` zone.
