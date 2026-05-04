@@ -1,9 +1,20 @@
 {
   "name": "@agilo/medusa-order-cart-widget",
   "version": "0.0.1",
-  "description": "A starter for Medusa plugins.",
-  "author": "Medusa (https://medusajs.com)",
+  "description": "Medusa plugin that adds an order cart widget to the admin order details page.",
+  "author": "Ante Primorac <ante@agilo.com>",
   "license": "MIT",
+  "homepage": "https://github.com/Agilo/medusa-order-cart-widget",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Agilo/medusa-order-cart-widget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Agilo/medusa-order-cart-widget/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     ".medusa/server"
   ],
@@ -22,10 +33,11 @@
   },
   "keywords": [
     "medusa",
-    "plugin",
-    "medusa-plugin-other",
     "medusa-plugin",
-    "medusa-v2"
+    "medusa-admin",
+    "order-cart",
+    "orders",
+    "commerce"
   ],
   "scripts": {
     "build": "medusa plugin:build",
@@ -77,6 +89,8 @@
   },
   "packageManager": "yarn@4.9.2",
   "dependencies": {
+    "@babel/runtime": "^7.26.10",
+    "@medusajs/js-sdk": "2.12.4",
     "@uiw/react-json-view": "^2.0.0-alpha.41"
   }
 }

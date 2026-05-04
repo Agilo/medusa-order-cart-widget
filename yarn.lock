@@ -9,11 +9,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@agilo/medusa-order-cart-widget@workspace:."
   dependencies:
+    "@babel/runtime": "npm:^7.26.10"
     "@eslint/js": "npm:^10.0.1"
     "@medusajs/admin-sdk": "npm:2.12.4"
     "@medusajs/cli": "npm:2.12.4"
     "@medusajs/framework": "npm:2.12.4"
     "@medusajs/icons": "npm:2.12.4"
+    "@medusajs/js-sdk": "npm:2.12.4"
     "@medusajs/medusa": "npm:2.12.4"
     "@medusajs/test-utils": "npm:2.12.4"
     "@medusajs/ui": "npm:4.0.25"
