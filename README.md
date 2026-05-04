@@ -11,7 +11,14 @@ The widget fetches the cart linked to an order and shows:
 
 ## Compatibility
 
-Tested with Medusa v2.12.4.
+Compatible with Medusa >=2.12.0 and <3.0.0.
+
+Verified locally with Medusa v2.12.4.
+
+## Requirements
+
+- Node.js 20 or newer
+- A Medusa backend on v2.12.x or newer
 
 ## Installation
 
@@ -50,21 +57,10 @@ If an order does not have a linked cart, the route returns a `NOT_FOUND` error a
 yarn dev
 ```
 
-Useful checks before publishing:
+## Testing
 
 ```bash
-yarn lint
-yarn typecheck
-yarn build
-npm pack --dry-run
-```
-
-## Publishing
-
-This package is configured for public npm publishing.
-
-```bash
-npm publish
+yarn test
 ```
 
 ## License
