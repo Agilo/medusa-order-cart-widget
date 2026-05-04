@@ -46,8 +46,10 @@
     "format:fix": "prettier . --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p src/admin/tsconfig.json",
-    "prepublishOnly": "medusa plugin:build"
+    "prepublishOnly": "yarn test && medusa plugin:build"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -59,12 +61,15 @@
     "@medusajs/test-utils": "2.12.4",
     "@medusajs/ui": "4.0.25",
     "@swc/core": "^1.7.28",
-    "@types/node": "^20.0.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^20.19.0",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.2.25",
     "eslint": "^10.3.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.6.0",
+    "jsdom": "^26.1.0",
     "prettier": "^3.8.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -73,16 +78,15 @@
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.59.1",
     "vite": "^5.4.21",
+    "vitest": "^3.2.4",
     "yalc": "^1.0.0-pre.53"
   },
   "peerDependencies": {
-    "@medusajs/admin-sdk": "2.12.4",
-    "@medusajs/cli": "2.12.4",
-    "@medusajs/framework": "2.12.4",
-    "@medusajs/icons": "2.12.4",
-    "@medusajs/medusa": "2.12.4",
-    "@medusajs/test-utils": "2.12.4",
-    "@medusajs/ui": "4.0.25"
+    "@medusajs/admin-sdk": ">=2.12.0 <3.0.0",
+    "@medusajs/framework": ">=2.12.0 <3.0.0",
+    "@medusajs/icons": ">=2.12.0 <3.0.0",
+    "@medusajs/medusa": ">=2.12.0 <3.0.0",
+    "@medusajs/ui": ">=4.0.0 <5.0.0"
   },
   "engines": {
     "node": ">=20"
@@ -91,6 +95,7 @@
   "dependencies": {
     "@babel/runtime": "^7.26.10",
     "@medusajs/js-sdk": "2.12.4",
+    "@tanstack/react-query": "5.64.2",
     "@uiw/react-json-view": "^2.0.0-alpha.41"
   }
 }
