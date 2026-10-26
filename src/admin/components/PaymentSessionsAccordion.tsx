@@ -49,95 +49,117 @@ const PaymentSessionsAccordion = ({
         {title}
       </Text>
 
-      <div className="flex flex-col border border-ui-border-base rounded-lg divide-y">
-        {(
-          paymentSessions as (AdminPaymentSession & {
-            created_at: string | Date;
-          })[]
-        ).map((s) => (
-          <div key={s.id} className="flex flex-col px-4 divide-y">
-            <div className="flex justify-between items-center gap-4 py-2">
-              <Text
-                className="flex gap-2 items-center text-ui-fg-subtle"
-                weight="plus"
-                size="small"
-              >
-                {s.provider_id}
-              </Text>
-
-              <div className="flex items-center gap-4">
-                <StatusBadge color={getPaymentSessionBadgeColor(s.status)}>
-                  {formatStatus(s.status)}
-                </StatusBadge>
-
-                <IconButton
-                  variant="transparent"
+      {paymentSessions.length === 0 ? (
+        <Text className="text-ui-fg-muted" size="small">
+          No payment sessions
+        </Text>
+      ) : (
+        <div className="flex flex-col border border-ui-border-base rounded-lg divide-y">
+          {(
+            paymentSessions as (AdminPaymentSession & {
+              created_at: string | Date;
+            })[]
+          ).map((s) => (
+            <div key={s.id} className="flex flex-col px-4 divide-y">
+              <div className="flex justify-between items-center gap-4 py-2">
+                <Text
+                  className="flex gap-2 items-center text-ui-fg-subtle"
+                  weight="plus"
                   size="small"
-                  onClick={() =>
-                    setActive((prev) => (prev === s.id ? null : s.id))
-                  }
                 >
-                  <ChevronDown
-                    className={`transition-transform duration-200 ${
-                      active === s.id ? "rotate-180" : ""
-                    }`}
-                  />
-                </IconButton>
+                  {s.provider_id}
+                </Text>
+
+                <div className="flex items-center gap-4">
+                  <StatusBadge color={getPaymentSessionBadgeColor(s.status)}>
+                    {formatStatus(s.status)}
+                  </StatusBadge>
+
+                  <IconButton
+                    variant="transparent"
+                    size="small"
+                    onClick={() =>
+                      setActive((prev) => (prev === s.id ? null : s.id))
+                    }
+                  >
+                    <ChevronDown
+                      className={`transition-transform duration-200 ${
+                        active === s.id ? "rotate-180" : ""
+                      }`}
+                    />
+                  </IconButton>
+                </div>
+              </div>
+
+              <div
+                className={`flex flex-col px-4 gap-2 overflow-hidden transition-all duration-300 ${
+                  active === s.id
+                    ? "max-h-50 py-2 opacity-100"
+                    : "max-h-0 py-0 opacity-0"
+                }`}
+              >
+                <div className="grid w-full grid-cols-2 gap-4">
+                  <Text
+                    className="text-ui-fg-subtle"
+                    weight="plus"
+                    size="xsmall"
+                  >
+                    Amount
+                  </Text>
+                  <Text className="text-ui-fg-muted break-words" size="xsmall">
+                    {formatAmount(s.amount, s.currency_code)}
+                  </Text>
+                </div>
+
+                <div className="grid w-full grid-cols-2 gap-4">
+                  <Text
+                    className="text-ui-fg-subtle"
+                    weight="plus"
+                    size="xsmall"
+                  >
+                    Created at
+                  </Text>
+                  <Text className="text-ui-fg-muted break-words" size="xsmall">
+                    {new Date(s.created_at!).toLocaleString()}
+                  </Text>
+                </div>
+
+                <div className="grid w-full grid-cols-2 gap-4">
+                  <Text
+                    className="text-ui-fg-subtle"
+                    weight="plus"
+                    size="xsmall"
+                  >
+                    Authorized at
+                  </Text>
+                  <Text className="text-ui-fg-muted break-words" size="xsmall">
+                    {s.authorized_at
+                      ? new Date(s.authorized_at).toLocaleString()
+                      : "-"}
+                  </Text>
+                </div>
+
+                <div className="grid w-full grid-cols-2 gap-4">
+                  <Text
+                    className="text-ui-fg-subtle"
+                    weight="plus"
+                    size="xsmall"
+                  >
+                    Psp reference
+                  </Text>
+                  <Text className="text-ui-fg-muted break-words" size="xsmall">
+                    {(s.data as PaymentSessionData).pspReference ?? "-"}
+                  </Text>
+                </div>
+
+                <div className="w-full items-center gap-4 mt-4">
+                  <JsonViewSection data={s} size="xsmall" />
+                </div>
               </div>
             </div>
-
-            <div
-              className={`flex flex-col px-4 gap-2 overflow-hidden transition-all duration-300 ${
-                active === s.id
-                  ? "max-h-50 py-2 opacity-100"
-                  : "max-h-0 py-0 opacity-0"
-              }`}
-            >
-              <div className="grid w-full grid-cols-2 gap-4">
-                <Text className="text-ui-fg-subtle" weight="plus" size="xsmall">
-                  Amount
-                </Text>
-                <Text className="text-ui-fg-muted break-words" size="xsmall">
-                  {formatAmount(s.amount, s.currency_code)}
-                </Text>
-              </div>
-
-              <div className="grid w-full grid-cols-2 gap-4">
-                <Text className="text-ui-fg-subtle" weight="plus" size="xsmall">
-                  Created at
-                </Text>
-                <Text className="text-ui-fg-muted break-words" size="xsmall">
-                  {new Date(s.created_at!).toLocaleString()}
-                </Text>
-              </div>
-
-              <div className="grid w-full grid-cols-2 gap-4">
-                <Text className="text-ui-fg-subtle" weight="plus" size="xsmall">
-                  Authorized at
-                </Text>
-                <Text className="text-ui-fg-muted break-words" size="xsmall">
-                  {s.authorized_at
-                    ? new Date(s.authorized_at).toLocaleString()
-                    : "-"}
-                </Text>
-              </div>
-
-              <div className="grid w-full grid-cols-2 gap-4">
-                <Text className="text-ui-fg-subtle" weight="plus" size="xsmall">
-                  Psp reference
-                </Text>
-                <Text className="text-ui-fg-muted break-words" size="xsmall">
-                  {(s.data as PaymentSessionData).pspReference ?? "-"}
-                </Text>
-              </div>
-
-              <div className="w-full items-center gap-4 mt-4">
-                <JsonViewSection data={s} size="xsmall" />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
