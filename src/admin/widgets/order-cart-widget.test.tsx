@@ -1,6 +1,6 @@
 import type { PropsWithChildren, ReactNode } from "react";
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi, beforeEach } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi, beforeEach } from "vitest";
 import OrderCartWidget from "./order-cart-widget";
 import { useOrderCart } from "../hooks/order-cart";
 
@@ -50,6 +50,10 @@ const mockedUseOrderCart = vi.mocked(useOrderCart);
 describe("OrderCartWidget", () => {
   beforeEach(() => {
     mockedUseOrderCart.mockReset();
+  });
+
+  afterEach(() => {
+    cleanup();
   });
 
   it("renders a loading state", () => {
@@ -111,4 +115,41 @@ describe("OrderCartWidget", () => {
       "Payment sessions:1",
     );
   });
+
+  it.each<[string, null | undefined]>([
+    ["missing", undefined],
+    ["null", null],
+  ])(
+    "renders without payment sessions when payment_collection is %s",
+    (_, paymentCollection) => {
+      mockedUseOrderCart.mockReturnValue({
+        data: {
+          id: "cart_gift_card",
+          region_id: "reg_123",
+          customer_id: "cus_123",
+          sales_channel_id: "sc_123",
+          email: "customer@example.com",
+          currency_code: "usd",
+          locale: "en",
+          metadata: null,
+          completed_at: null,
+          created_at: "2026-05-04T10:00:00.000Z",
+          updated_at: "2026-05-04T10:00:00.000Z",
+          deleted_at: null,
+          shipping_address_id: "addr_ship",
+          billing_address_id: "addr_bill",
+          payment_collection: paymentCollection,
+        },
+        isLoading: false,
+        error: null,
+      } as ReturnType<typeof useOrderCart>);
+
+      render(<OrderCartWidget data={{ id: "order_123" } as never} />);
+
+      expect(screen.getByText("cart_gift_card")).not.toBeNull();
+      expect(screen.getByTestId("payment-sessions").textContent).toContain(
+        "Payment sessions:0",
+      );
+    },
+  );
 });

@@ -104,7 +104,7 @@ const OrderCartWidget = ({ data }: DetailWidgetProps<AdminOrder>) => {
       <PaymentSessionsAccordion
         title="Payment sessions"
         paymentSessions={
-          orderCartData?.payment_collection.payment_sessions || []
+          orderCartData?.payment_collection?.payment_sessions ?? []
         }
       />
     </Container>

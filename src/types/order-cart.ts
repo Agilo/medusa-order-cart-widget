@@ -15,5 +15,5 @@ export type GetOrderCartResponse = {
   deleted_at: Date | string | null;
   shipping_address_id: string;
   billing_address_id: string;
-  payment_collection: AdminPaymentCollection;
+  payment_collection?: AdminPaymentCollection | null;
 };
