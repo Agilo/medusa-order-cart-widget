@@ -9,7 +9,7 @@ The widget fetches the cart linked to an order and shows:
 - raw cart JSON in an inspector drawer
 - payment sessions with status, amount, timestamps, PSP reference, and raw JSON
 
-<img src="https://raw.githubusercontent.com/Agilo/medusa-order-cart-widget/main/docs/screenshots/payment_session_expanded.jpg" alt="Order Cart widget showing cart ID, timestamps, locale, cart JSON and an expanded payment session" width="470">
+<img src="https://raw.githubusercontent.com/Agilo/medusa-order-cart-widget/main/docs/screenshots/payment_session_expanded.jpg" alt="Order Cart widget showing cart ID, timestamps, locale, cart JSON and an expanded payment session">
 
 ## Compatibility
 
